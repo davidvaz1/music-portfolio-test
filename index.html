@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev & Drum | The Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DEV &lt;/&gt; AUDIO</div>
+        <div class="links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="about">
+        <div class="hero-content">
+            <h1>HELLO, I'M <span class="highlight">ALEX.</span></h1>
+            <h2>I BUILD <span class="type-writer">SYSTEMS</span> & <span class="type-writer">SYNTHS</span>.</h2>
+            
+            <p class="quote" id="dynamic-quote">"Loading inspiration..."</p>
+            
+            <button class="cta-btn" onclick="playRandomNote()">LET'S JAM</button>
+        </div>
+        
+        <div class="piano-container">
+            <div class="key white" data-note="C"></div>
+            <div class="key black" data-note="C#"></div>
+            <div class="key white" data-note="D"></div>
+            <div class="key black" data-note="D#"></div>
+            <div class="key white" data-note="E"></div>
+            <div class="key white" data-note="F"></div>
+            <div class="key black" data-note="F#"></div>
+            <div class="key white" data-note="G"></div>
+        </div>
+    </header>
+
+    <section id="projects">
+        <h3>LATEST TRACKS (PROJECTS)</h3>
+        <div class="grid">
+            <div class="card card-yellow">
+                <div class="icon">🎹</div>
+                <h4>JS MIDI Generator</h4>
+                <p>Algorithmic music composition using Markov Chains in the browser.</p>
+                <a href="#">View Code</a>
+            </div>
+            <div class="card card-pink">
+                <div class="icon">⚡</div>
+                <h4>React Audio Visualizer</h4>
+                <p>Real-time frequency analysis using Web Audio API and Canvas.</p>
+                <a href="#">View Code</a>
+            </div>
+            <div class="card card-blue">
+                <div class="icon">🤖</div>
+                <h4>Discord Music Bot</h4>
+                <p>A high-performance bot interacting with YouTube and Spotify APIs.</p>
+                <a href="#">View Code</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h3>DROP A BEAT (CONTACT)</h3>
+        <form id="contact-form">
+            <div class="form-group">
+                <label>YOUR NAME</label>
+                <input type="text" placeholder="Mozart" required>
+            </div>
+            <div class="form-group">
+                <label>YOUR MESSAGE</label>
+                <textarea rows="4" placeholder="Let's build something loud..." required></textarea>
+            </div>
+            <button type="submit" class="cta-btn">SEND IT</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>Made with 🎵 and JavaScript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
