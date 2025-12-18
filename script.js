@@ -2,6 +2,7 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
+// Frequency map for keys
 const notes = {
     'C': 261.63,
     'C#': 277.18,
@@ -13,8 +14,11 @@ const notes = {
     'G': 392.00
 };
 
-// Play a synthesized tone
-function playTone(freq, type = 'triangle') {
+// Array of all note frequencies for randomization
+const allNoteFrequencies = Object.values(notes);
+
+// New, less synthy, Marimba-like tone function
+function playTone(freq) {
     if (audioCtx.state === 'suspended') {
         audioCtx.resume();
     }
@@ -22,19 +26,20 @@ function playTone(freq, type = 'triangle') {
     const osc = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
 
-    osc.type = type;
+    // Sound Design: Sine wave for a clean, non-aggressive tone
+    osc.type = 'sine'; 
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-    // Audio Envelope (Prevent clicking sounds)
+    // Envelope: Fast attack and very quick decay for a 'click' or mallet sound
     gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.02);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+    gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.005); // Very fast attack
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25); // Quick decay
 
     osc.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
     osc.start();
-    osc.stop(audioCtx.currentTime + 0.5);
+    osc.stop(audioCtx.currentTime + 0.25); // Stop the sound quickly
 }
 
 // --- 2. Interactivity ---
@@ -71,7 +76,7 @@ function removeActive(key) {
     key.classList.remove('playing');
 }
 
-// Play random note from "Let's Jam" button
+// Function to play a random note (for the "Let's Jam" button)
 function playRandomNote() {
     const keysArr = Object.keys(notes);
     const randomKey = keysArr[Math.floor(Math.random() * keysArr.length)];
@@ -85,11 +90,18 @@ function playRandomNote() {
     }
 }
 
-// Add 'blip' sound to all buttons and links
-document.querySelectorAll('button, a').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        playTone(800, 'sine'); // High pitch sine blip
-    });
+// Add randomized sound only to all button/link clicks (mousedown/touchstart)
+document.querySelectorAll('a, button, .card').forEach(el => {
+    // Use mousedown/touchstart for a responsive click feel
+    const clickHandler = () => {
+        const randomFreq = allNoteFrequencies[Math.floor(Math.random() * allNoteFrequencies.length)];
+        playTone(randomFreq);
+    };
+
+    el.addEventListener('mousedown', clickHandler);
+    el.addEventListener('touchstart', clickHandler);
+    
+    // REMOVED: el.addEventListener('mouseenter', ...);
 });
 
 
@@ -111,11 +123,11 @@ document.getElementById('dynamic-quote').innerText =
 document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Play a "Success" chord
+    // Play a random successful chord on submit
     setTimeout(() => playTone(notes['C']), 0);
     setTimeout(() => playTone(notes['E']), 100);
     setTimeout(() => playTone(notes['G']), 200);
 
-    alert("Thanks for the message! Since this is a static demo, your message wasn't actually sent, but it sounded good!");
+    alert("Thanks for the message! Your message wasn't actually sent (static site), but it sounded good!");
     this.reset();
 });
