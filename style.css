@@ -1,0 +1,234 @@
+:root {
+    --bg-color: #fff1e5;
+    --text-color: #1a1a1a;
+    --primary: #FF0055; /* Hot Pink */
+    --secondary: #00AAFF; /* Electric Blue */
+    --accent: #FFCC00; /* Bold Yellow */
+    --border: 4px solid #000;
+    --shadow: 8px 8px 0px #000;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Nav */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: var(--border);
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: default;
+}
+
+.links a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin-left: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.links a:hover {
+    color: var(--secondary);
+    text-decoration: underline wavy var(--primary);
+}
+
+/* Hero */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin: 0;
+    line-height: 1;
+}
+
+h2 {
+    margin: 10px 0 30px 0;
+}
+
+.highlight {
+    background-color: var(--accent);
+    padding: 0 10px;
+}
+
+.quote {
+    font-style: italic;
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    transform: rotate(-2deg);
+    margin: 20px 0;
+    max-width: 600px;
+}
+
+.cta-btn {
+    background: var(--primary);
+    color: #fff;
+    border: var(--border);
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.cta-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0px #000;
+}
+
+/* Piano Animation */
+.piano-container {
+    display: flex;
+    margin-top: 50px;
+    position: relative;
+    user-select: none;
+}
+
+.key {
+    width: 40px;
+    height: 140px;
+    border: 3px solid #000;
+    background: #fff;
+    margin: 0 2px;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.key:active, .key.playing {
+    background: var(--secondary);
+}
+
+.key.black {
+    width: 28px;
+    height: 85px;
+    background: #000;
+    margin-left: -16px;
+    margin-right: -16px;
+    z-index: 2;
+}
+
+.key.black:active, .key.black.playing {
+    background: var(--primary);
+}
+
+/* Projects Grid */
+#projects, #contact {
+    padding: 60px 10%;
+    background: #fff;
+    border-top: var(--border);
+}
+
+h3 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    border-bottom: 4px solid var(--accent);
+    display: inline-block;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    border: var(--border);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 12px 12px 0px #000;
+}
+
+.card-yellow { border-left: 10px solid var(--accent); }
+.card-pink { border-left: 10px solid var(--primary); }
+.card-blue { border-left: 10px solid var(--secondary); }
+
+.card a {
+    margin-top: auto;
+    color: var(--text-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Contact Form */
+#contact {
+    background-color: var(--accent);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    border: var(--border);
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box; /* Fixes padding issues */
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    background: #fff1e5;
+}
+
+footer {
+    padding: 30px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .piano-container { transform: scale(0.9); }
+    nav { padding: 20px; flex-direction: column; align-items: center; gap: 15px; }
+    .links a { margin: 0 10px; }
+}
